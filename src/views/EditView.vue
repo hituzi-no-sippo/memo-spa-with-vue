@@ -9,6 +9,7 @@
     >
       Update
     </button>
+    <button @click="remove">Delete</button>
   </div>
 </template>
 
@@ -35,8 +36,11 @@ export default {
     const update = () => {
       emit('update', props.index, content)
     }
+    const remove = () => {
+      emit('remove', props.index)
+    }
 
-    return { content, isEmptyTitle, update }
+    return { content, isEmptyTitle, update, remove  }
   }
 }
 </script>

@@ -8,6 +8,7 @@
     name="EditView"
     :key="$route.path"
     @update="update"
+    @remove="remove"
   />
 </template>
 
@@ -36,8 +37,12 @@ export default {
       contents.value[index] = content
       closeEditView()
     }
+    const remove = (index) => {
+      contents.value.splice(index, 1)
+      closeEditView()
+    }
 
-    return { contents, openEditView, closeEditView, update }
+    return { contents, openEditView, closeEditView, update, remove }
   }
 }
 </script>
