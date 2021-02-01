@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="(content, index) in contents" :key="index">
-      {{ content.title }}
+      <span @click="edit(index)">{{content.title}}</span>
     </li>
   </ul>
 </template>
@@ -12,5 +12,13 @@ export default {
   props: {
     contents: Array
   },
+  emits: ['edit'],
+  setup(_, { emit }) {
+    const edit = (index) => {
+      emit('edit', index)
+    }
+
+    return { edit }
+  }
 }
 </script>
