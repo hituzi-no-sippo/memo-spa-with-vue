@@ -1,9 +1,12 @@
 <template>
-  <ul>
-    <li v-for="(content, index) in contents" :key="index">
-      <span @click="edit(index)">{{content.title}}</span>
-    </li>
-  </ul>
+  <div class="titleList">
+    <ul>
+      <li v-for="(content, index) in contents" :key="index">
+        <span @click="edit(index)">{{content.title}}</span>
+      </li>
+    </ul>
+    <button @click="add">+</button>
+  </div>
 </template>
 
 <script>
@@ -12,13 +15,16 @@ export default {
   props: {
     contents: Array
   },
-  emits: ['edit'],
+  emits: ['edit', 'add'],
   setup(_, { emit }) {
     const edit = (index) => {
       emit('edit', index)
     }
+    const add = () => {
+      emit('add')
+    }
 
-    return { edit }
+    return { edit, add }
   }
 }
 </script>

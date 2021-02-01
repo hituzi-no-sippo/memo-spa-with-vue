@@ -3,6 +3,7 @@
     name="TitleList"
     :contents="contents"
     @edit="openEditView"
+    @add="add"
   />
   <router-view
     name="EditView"
@@ -19,10 +20,7 @@ import { useRouter } from 'vue-router'
 export default {
   name: 'App',
   setup() {
-    const contents = ref([
-      {title: 'aa', body: 'bb'},
-      {title: 'cc', body: 'dd'}
-    ])
+    const contents = ref([])
     const router = useRouter()
 
     const openEditView = (index) => {
@@ -33,6 +31,10 @@ export default {
       router.push({ name: 'home' })
     }
 
+    const add = () => {
+      contents.value.push({ title: 'new item', body: '' })
+      openEditView(contents.value.length - 1)
+    }
     const update = (index, content) => {
       contents.value[index] = content
       closeEditView()
@@ -42,7 +44,7 @@ export default {
       closeEditView()
     }
 
-    return { contents, openEditView, closeEditView, update, remove }
+    return { contents, openEditView, closeEditView, update, remove, add }
   }
 }
 </script>
