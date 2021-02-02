@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -31,18 +31,35 @@ export default {
       router.push({ name: 'home' })
     }
 
+    const saveToLocalStorage = () => {
+      localStorage.setItem('memos', JSON.stringify(contents.value));
+    }
+
     const add = () => {
       contents.value.push({ title: 'new item', body: '' })
+      saveToLocalStorage()
       openEditView(contents.value.length - 1)
     }
     const update = (index, content) => {
       contents.value[index] = content
+      saveToLocalStorage()
       closeEditView()
     }
     const remove = (index) => {
       contents.value.splice(index, 1)
+      saveToLocalStorage()
       closeEditView()
     }
+
+    onMounted(() => {
+      if (localStorage.getItem('memos')) {
+        try {
+          contents.value = JSON.parse(localStorage.getItem('memos'))
+        } catch(e) {
+          localStorage.removeItem('memos')
+        }
+      }
+    })
 
     return { contents, openEditView, closeEditView, update, remove, add }
   }
