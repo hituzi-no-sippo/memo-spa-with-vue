@@ -1,11 +1,13 @@
 <template>
   <div>
-    <span>{{ title }}</span>
-    <span>{{ body }}</span>
+    <input v-model="content.title" />
+    <textarea v-model="content.body" />
   </div>
 </template>
 
 <script>
+import { reactive } from 'vue'
+
 export default {
   name: 'Edit',
   props: {
@@ -13,5 +15,13 @@ export default {
     body: { type: String, required: true, },
     index: { type: String, required: true, },
   },
+  setup(props) {
+    const content = reactive({
+      title: props.title,
+      body:  props.body
+    })
+
+    return { content }
+  }
 }
 </script>
