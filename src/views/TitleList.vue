@@ -22,7 +22,6 @@
         class="
           my-3
           text-2xl
-          leading-5
           text-base
           font-medium
           cursor-pointer
