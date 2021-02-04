@@ -17,7 +17,7 @@
       my-2
     ">
       <li
-        v-for="(content, index) in contents"
+        v-for="(title, index) in titles"
         :key="index"
         class="
           my-3
@@ -31,7 +31,7 @@
           truncate
         "
       >
-        <span @click="edit(index)">{{content.title}}</span>
+        <span @click="edit(index)">{{title}}</span>
       </li>
     </ul>
     <button
@@ -56,7 +56,7 @@
 export default {
   name: 'TitleList',
   props: {
-    contents: Array
+    titles: Array
   },
   emits: ['edit', 'add'],
   setup(_, { emit }) {

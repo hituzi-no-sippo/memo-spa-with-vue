@@ -9,7 +9,7 @@
   ">
     <router-view
       name="TitleList"
-      :contents="contents"
+      :titles="extractTitle"
       @edit="openEditView"
       @add="add"
     />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -60,6 +60,10 @@ export default {
       closeEditView()
     }
 
+    const extractTitle = computed(() => {
+      return contents.value.map(content => content.title)
+    })
+
     onMounted(() => {
       if (localStorage.getItem('memos')) {
         try {
@@ -70,7 +74,7 @@ export default {
       }
     })
 
-    return { contents, openEditView, closeEditView, update, remove, add }
+    return { openEditView, closeEditView, update, remove, add, extractTitle }
   }
 }
 </script>
