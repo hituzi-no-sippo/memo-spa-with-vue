@@ -2,11 +2,12 @@
   <div>
     <input v-model="content.title" />
     <textarea v-model="content.body" />
+    <span v-if="isEmptyTitle">文字を入力してください</span>
   </div>
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 
 export default {
   name: 'Edit',
@@ -20,8 +21,11 @@ export default {
       title: props.title,
       body:  props.body
     })
+    const isEmptyTitle = computed(() => {
+      return content.title === ''
+    })
 
-    return { content }
+    return { content, isEmptyTitle }
   }
 }
 </script>
