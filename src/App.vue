@@ -7,27 +7,37 @@
   <router-view
     name="EditView"
     :key="$route.path"
+    @update="update"
   />
 </template>
 
 <script>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
   setup() {
-    const contents = [
+    const contents = ref([
       {title: 'aa', body: 'bb'},
       {title: 'cc', body: 'dd'}
-    ]
+    ])
     const router = useRouter()
 
     const openEditView = (index) => {
       router.push({ name: 'editViewOpen',
-                    params: { index, ...contents[index] }})
+                    params: { index, ...contents.value[index] }})
+    }
+    const closeEditView = () => {
+      router.push({ name: 'home' })
     }
 
-    return { contents, openEditView }
+    const update = (index, content) => {
+      contents.value[index] = content
+      closeEditView()
+    }
+
+    return { contents, openEditView, closeEditView, update }
   }
 }
 </script>

@@ -3,6 +3,12 @@
     <input v-model="content.title" />
     <textarea v-model="content.body" />
     <span v-if="isEmptyTitle">文字を入力してください</span>
+    <button
+      :disabled="isEmptyTitle"
+      @click="update"
+    >
+      Update
+    </button>
   </div>
 </template>
 
@@ -16,16 +22,21 @@ export default {
     body: { type: String, required: true, },
     index: { type: String, required: true, },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const content = reactive({
       title: props.title,
       body:  props.body
     })
+
     const isEmptyTitle = computed(() => {
       return content.title === ''
     })
 
-    return { content, isEmptyTitle }
+    const update = () => {
+      emit('update', props.index, content)
+    }
+
+    return { content, isEmptyTitle, update }
   }
 }
 </script>
