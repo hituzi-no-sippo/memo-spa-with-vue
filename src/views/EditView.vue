@@ -22,6 +22,14 @@
         rounded-full
       "
     />
+    <span
+      v-if="isEmptyTitle"
+      class="
+        text-red-500
+        font-bold
+        text-center
+      "
+    >タイトルを入力してください</span>
     <textarea
       v-model="content.body"
       class="
@@ -38,14 +46,6 @@
         h-full
       "
     />
-    <span
-      v-if="isEmptyTitle"
-      class="
-        text-red-500
-        font-bold
-        text-center
-      "
-    >文字を入力してください</span>
     <div
       class="
         buttons
