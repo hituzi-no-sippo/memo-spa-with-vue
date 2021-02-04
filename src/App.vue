@@ -1,16 +1,25 @@
 <template>
-  <router-view
-    name="TitleList"
-    :contents="contents"
-    @edit="openEditView"
-    @add="add"
-  />
-  <router-view
-    name="EditView"
-    :key="$route.path"
-    @update="update"
-    @remove="remove"
-  />
+  <div class="
+    flex
+    m-5
+    p-3
+    border-green-400
+    border-4
+    h-full
+  ">
+    <router-view
+      name="TitleList"
+      :contents="contents"
+      @edit="openEditView"
+      @add="add"
+    />
+    <router-view
+      name="EditView"
+      :key="$route.path"
+      @update="update"
+      @remove="remove"
+    />
+  </div>
 </template>
 
 <script>
@@ -65,3 +74,10 @@ export default {
   }
 }
 </script>
+
+<style>
+#app {
+  width: 540px;
+  height: 960px;
+}
+</style>
